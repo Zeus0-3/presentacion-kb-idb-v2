@@ -209,32 +209,56 @@ Se conserva: la base es acumulativa; cada clase nueva suma a las páginas que ya
 
 :::: {.cifras}
 ::: {}
-[30]{.grande}
+[30/30]{.grande}
 
 **clases**
 
-14 de IDB y 16 de EE
+14 de IDB y 16 de EE; +4 hoy: IDB 004, 006, 007 y 008
 :::
 ::: {}
-[+4]{.grande}
+[187]{.grande}
 
-**clases nuevas**
+**páginas**
 
-IDB 004, 006, 007 y 008
+clases, conceptos, herramientas y procedimientos
 :::
 ::: {}
-[0]{.grande}
+[2847]{.grande}
 
-**enlaces rotos**
+**enlaces**
 
-y 0 páginas huérfanas
+0 rotos y 0 páginas huérfanas
 :::
 ::: {}
-[↻]{.grande}
+[18]{.grande}
 
-**páginas, enlaces y citas**
+**alertas ⚠️ abiertas**
 
-se recalculan con `check.py`
+dudas de las clases nuevas, en `wiki/alertas.md`
+:::
+::::
+:::::
+
+## Las alertas ya trabajan {.cambio}
+
+::::: {.cuerpo}
+::: {.pedido}
+Ejemplo real de la ingesta de IDB 008: el agente no se queda con la duda, la registra
+:::
+
+:::: {.columns}
+::: {.column .antes width="48%"}
+[Lo que dijo la clase]{.etiqueta}
+
+- La *Sunlit Fraction* de la ventana protegida llega a uno: «Me sorprende que llegue a uno» (35:06)
+- Por el nombre (fracción **iluminada**) se esperaría 0 con sombra total
+:::
+::: {.column .despues width="48%"}
+[Qué hizo el agente NK]{.etiqueta}
+
+- Abrió **A-015 · ⚠️ Duda** en `wiki/alertas.md`
+- Dejó el aviso en la página de la clase
+- Propuso revisarlo contra el video y el *Engineering Reference*; no corrigió solo
 :::
 ::::
 :::::
@@ -281,6 +305,52 @@ Se pidió: ¿con qué indicadores medimos la salud y cada cuánto? **Al terminar
 | Conceptos con < 2 enlaces justificados | revisados | sin revisar |
 :::
 
+:::::
+
+## Cómo funciona `check.py` {.cambio}
+
+::::: {.cuerpo}
+::: {.pedido}
+`uv run scripts/check.py --salud` revisa toda la wiki y anota el resultado con fecha en `wiki/salud.md`
+:::
+
+:::: {.columns}
+::: {.column .antes width="48%"}
+[Qué revisa]{.etiqueta}
+
+1. El encabezado de cada página: tipo, estado, fuentes
+2. Cada enlace: ¿existe su destino?
+3. Páginas huérfanas y títulos repetidos
+4. Alertas abiertas y notas sin definir
+:::
+::: {.column .despues width="48%"}
+[Qué entrega]{.etiqueta}
+
+- **Errores**: lo que rompe el formato; hay que arreglarlo
+- **Avisos**: lo que conviene revisar
+- **Examen médico**: los indicadores de salud, con fecha, para ver la tendencia
+:::
+::::
+:::::
+
+## ¿Por qué un script de Python y no el agente? {.cambio}
+
+::::: {.cuerpo}
+::: {.pedido}
+Contar y verificar no necesita inteligencia: necesita dar **siempre el mismo resultado**
+:::
+
+::: {.rubrica}
+| Criterio | Pedírselo al agente | `check.py` |
+|---|---|---|
+| Resultado | puede variar entre corridas o equivocarse al contar | idéntico cada vez |
+| Costo | gasta tokens en cada revisión | 0 tokens; corre local, sin internet |
+| Tiempo | tiene que leer las 187 páginas | medio segundo (medido) |
+| Auditable | no se ve cómo contó | 91 líneas que cualquiera puede leer |
+| Reproducible | depende del modelo | `uv` fija Python y `pyyaml`; igual en las bases A y B |
+
+: El agente escribe y razona; el script mide. Así el examen médico no depende de quien lo hace.
+:::
 :::::
 
 ## ¿Cuánto cuesta mantener la base? {.cambio}
@@ -361,22 +431,26 @@ Se pidió: quitar la re-ingesta de respuestas buenas a la base
 | Alerta ⚠️ / 🚨 | Duda del modelo / choque con un artículo | `wiki/alertas.md` |
 | Agente NK | Detecta y gestiona alertas | reglas en `schema/` |
 | `check.py` | Validador y examen médico | `scripts/check.py` |
+| `Lint` | Orden para que el agente revise la wiki | `schema/AGENTS.md` |
 :::
 :::
 
 <!-- PLANTILLA antes/después: copiar la lámina «Revisar todo frena…» por cada punto -->
 
-## Siguientes pasos {.cambio}
+## Estado de cada punto {.cambio}
 
 ::: {.cuerpo}
-::: {.rubrica}
-| Qué | Dónde |
-|---|---|
-| Protocolo NK, alertas y semáforo solo en artículos | `schema/` de las bases A y B |
-| Sigla EE en carpetas e identificadores | `raw/`, `wiki/`, `schema/` |
-| Glosario y agente de coherencia | `schema/`, presentación |
-| Enlaces justificados y examen médico | `schema/`, `check.py`, `wiki/salud.md` |
-| Columnas de costo en `log.md` | `schema/`, `log.md` |
-| Quitar `Guardar consulta` | `schema/` |
+::: {.rubrica .compacta}
+| Punto | Estado | Dónde |
+|---|---|---|
+| Semáforo solo en artículos · alertas · agente NK | ✅ hecho | `schema/`, `wiki/alertas.md` |
+| Sigla EE en carpetas e identificadores | ✅ hecho | `raw/`, `wiki/`, `schema/` |
+| Glosario y orden `Coherencia` | ✅ hecho | `schema/GLOSARIO.md` |
+| Clases IDB 004, 006, 007 y 008 | ✅ ingeridas | `wiki/classes/idb/` |
+| Enlaces justificados y examen médico | ✅ hecho | `schema/`, `check.py`, `wiki/salud.md` |
+| Sin re-ingesta de respuestas | ✅ hecho | `schema/` |
+| Costo: revisión bibliográfica | ✅ hecha | `REVISION_COSTO_LLM.md` |
+| Costo: columnas en `log.md` | ⏳ por decidir | `log.md` |
+| Revisar alertas abiertas | ⏳ con el experto | `wiki/alertas.md` |
 :::
 :::

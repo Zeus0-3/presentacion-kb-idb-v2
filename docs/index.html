@@ -1180,26 +1180,49 @@ Zeus
 </div>
 <div class="cifras">
 <div>
-<p><span class="grande">30</span></p>
+<p><span class="grande">30/30</span></p>
 <p><strong>clases</strong></p>
-<p>14 de IDB y 16 de EE</p>
+<p>14 de IDB y 16 de EE; +4 hoy: IDB 004, 006, 007 y 008</p>
 </div>
 <div>
-<p><span class="grande">+4</span></p>
-<p><strong>clases nuevas</strong></p>
-<p>IDB 004, 006, 007 y 008</p>
+<p><span class="grande">187</span></p>
+<p><strong>páginas</strong></p>
+<p>clases, conceptos, herramientas y procedimientos</p>
 </div>
 <div>
-<p><span class="grande">0</span></p>
-<p><strong>enlaces rotos</strong></p>
-<p>y 0 páginas huérfanas</p>
+<p><span class="grande">2847</span></p>
+<p><strong>enlaces</strong></p>
+<p>0 rotos y 0 páginas huérfanas</p>
 </div>
 <div>
-<p><span class="grande">↻</span></p>
-<p><strong>páginas, enlaces y citas</strong></p>
-<p>se recalculan con <code>check.py</code></p>
+<p><span class="grande">18</span></p>
+<p><strong>alertas ⚠️ abiertas</strong></p>
+<p>dudas de las clases nuevas, en <code>wiki/alertas.md</code></p>
 </div>
 </div>
+</div>
+</section>
+<section id="las-alertas-ya-trabajan" class="slide level2 cambio">
+<h2>Las alertas ya trabajan</h2>
+<div class="cuerpo">
+<div class="pedido">
+<p>Ejemplo real de la ingesta de IDB 008: el agente no se queda con la duda, la registra</p>
+</div>
+<div class="columns">
+<div class="column antes" style="width:48%;">
+<p><span class="etiqueta">Lo que dijo la clase</span></p>
+<ul>
+<li>La <em>Sunlit Fraction</em> de la ventana protegida llega a uno: «Me sorprende que llegue a uno» (35:06)</li>
+<li>Por el nombre (fracción <strong>iluminada</strong>) se esperaría 0 con sombra total</li>
+</ul>
+</div><div class="column despues" style="width:48%;">
+<p><span class="etiqueta">Qué hizo el agente NK</span></p>
+<ul>
+<li>Abrió <strong>A-015 · ⚠️ Duda</strong> en <code>wiki/alertas.md</code></li>
+<li>Dejó el aviso en la página de la clase</li>
+<li>Propuso revisarlo contra el video y el <em>Engineering Reference</em>; no corrigió solo</li>
+</ul>
+</div></div>
 </div>
 </section>
 <section id="enlazar-solo-lo-que-de-verdad-se-relaciona" class="slide level2 cambio">
@@ -1275,6 +1298,83 @@ Zeus
 <td>Conceptos con &lt; 2 enlaces justificados</td>
 <td>revisados</td>
 <td>sin revisar</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="cómo-funciona-check.py" class="slide level2 cambio">
+<h2>Cómo funciona <code>check.py</code></h2>
+<div class="cuerpo">
+<div class="pedido">
+<p><code>uv run scripts/check.py --salud</code> revisa toda la wiki y anota el resultado con fecha en <code>wiki/salud.md</code></p>
+</div>
+<div class="columns">
+<div class="column antes" style="width:48%;">
+<p><span class="etiqueta">Qué revisa</span></p>
+<ol type="1">
+<li>El encabezado de cada página: tipo, estado, fuentes</li>
+<li>Cada enlace: ¿existe su destino?</li>
+<li>Páginas huérfanas y títulos repetidos</li>
+<li>Alertas abiertas y notas sin definir</li>
+</ol>
+</div><div class="column despues" style="width:48%;">
+<p><span class="etiqueta">Qué entrega</span></p>
+<ul>
+<li><strong>Errores</strong>: lo que rompe el formato; hay que arreglarlo</li>
+<li><strong>Avisos</strong>: lo que conviene revisar</li>
+<li><strong>Examen médico</strong>: los indicadores de salud, con fecha, para ver la tendencia</li>
+</ul>
+</div></div>
+</div>
+</section>
+<section id="por-qué-un-script-de-python-y-no-el-agente" class="slide level2 cambio">
+<h2>¿Por qué un script de Python y no el agente?</h2>
+<div class="cuerpo">
+<div class="pedido">
+<p>Contar y verificar no necesita inteligencia: necesita dar <strong>siempre el mismo resultado</strong></p>
+</div>
+<div class="rubrica">
+<table class="caption-top">
+<caption>El agente escribe y razona; el script mide. Así el examen médico no depende de quien lo hace.</caption>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Criterio</th>
+<th>Pedírselo al agente</th>
+<th><code>check.py</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Resultado</td>
+<td>puede variar entre corridas o equivocarse al contar</td>
+<td>idéntico cada vez</td>
+</tr>
+<tr class="even">
+<td>Costo</td>
+<td>gasta tokens en cada revisión</td>
+<td>0 tokens; corre local, sin internet</td>
+</tr>
+<tr class="odd">
+<td>Tiempo</td>
+<td>tiene que leer las 187 páginas</td>
+<td>medio segundo (medido)</td>
+</tr>
+<tr class="even">
+<td>Auditable</td>
+<td>no se ve cómo contó</td>
+<td>91 líneas que cualquiera puede leer</td>
+</tr>
+<tr class="odd">
+<td>Reproducible</td>
+<td>depende del modelo</td>
+<td><code>uv</code> fija Python y <code>pyyaml</code>; igual en las bases A y B</td>
 </tr>
 </tbody>
 </table>
@@ -1465,51 +1565,79 @@ Zeus
 <td>Validador y examen médico</td>
 <td><code>scripts/check.py</code></td>
 </tr>
+<tr class="even">
+<td><code>Lint</code></td>
+<td>Orden para que el agente revise la wiki</td>
+<td><code>schema/AGENTS.md</code></td>
+</tr>
 </tbody>
 </table>
 </div>
 </div>
 <!-- PLANTILLA antes/después: copiar la lámina «Revisar todo frena…» por cada punto -->
 </section>
-<section id="siguientes-pasos" class="slide level2 cambio">
-<h2>Siguientes pasos</h2>
+<section id="estado-de-cada-punto" class="slide level2 cambio">
+<h2>Estado de cada punto</h2>
 <div class="cuerpo">
-<div class="rubrica">
+<div class="rubrica compacta">
 <table class="caption-top">
 <colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Qué</th>
+<th>Punto</th>
+<th>Estado</th>
 <th>Dónde</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Protocolo NK, alertas y semáforo solo en artículos</td>
-<td><code>schema/</code> de las bases A y B</td>
+<td>Semáforo solo en artículos · alertas · agente NK</td>
+<td>✅ hecho</td>
+<td><code>schema/</code>, <code>wiki/alertas.md</code></td>
 </tr>
 <tr class="even">
 <td>Sigla EE en carpetas e identificadores</td>
+<td>✅ hecho</td>
 <td><code>raw/</code>, <code>wiki/</code>, <code>schema/</code></td>
 </tr>
 <tr class="odd">
-<td>Glosario y agente de coherencia</td>
-<td><code>schema/</code>, presentación</td>
+<td>Glosario y orden <code>Coherencia</code></td>
+<td>✅ hecho</td>
+<td><code>schema/GLOSARIO.md</code></td>
 </tr>
 <tr class="even">
-<td>Enlaces justificados y examen médico</td>
-<td><code>schema/</code>, <code>check.py</code>, <code>wiki/salud.md</code></td>
+<td>Clases IDB 004, 006, 007 y 008</td>
+<td>✅ ingeridas</td>
+<td><code>wiki/classes/idb/</code></td>
 </tr>
 <tr class="odd">
-<td>Columnas de costo en <code>log.md</code></td>
-<td><code>schema/</code>, <code>log.md</code></td>
+<td>Enlaces justificados y examen médico</td>
+<td>✅ hecho</td>
+<td><code>schema/</code>, <code>check.py</code>, <code>wiki/salud.md</code></td>
 </tr>
 <tr class="even">
-<td>Quitar <code>Guardar consulta</code></td>
+<td>Sin re-ingesta de respuestas</td>
+<td>✅ hecho</td>
 <td><code>schema/</code></td>
+</tr>
+<tr class="odd">
+<td>Costo: revisión bibliográfica</td>
+<td>✅ hecha</td>
+<td><code>REVISION_COSTO_LLM.md</code></td>
+</tr>
+<tr class="even">
+<td>Costo: columnas en <code>log.md</code></td>
+<td>⏳ por decidir</td>
+<td><code>log.md</code></td>
+</tr>
+<tr class="odd">
+<td>Revisar alertas abiertas</td>
+<td>⏳ con el experto</td>
+<td><code>wiki/alertas.md</code></td>
 </tr>
 </tbody>
 </table>
