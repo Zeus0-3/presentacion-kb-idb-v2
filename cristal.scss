@@ -1,15 +1,27 @@
 /*-- scss:defaults --*/
 // Tokens: se reemplazan con la paleta que salga del sorteador (taller/app.html)
-$principal: #2f6f7e !default;
-$acento:    #b5653a !default;
-$fondo:     #eef3f4 !default;
-$texto:     #1d2a2e !default;
+// Paleta sorteada en taller/app.html (estilo base: Bento plano · viñeta: plana)
+$fondo:     #fefbf5;
+$tarjeta:   #f4ebd7;
+$borde:     #e7dbc3;
+$texto:     #241c09;
+$suave:     #514731;
+$principal: #85724a;
+$acento:    #5a5725;
+$terciario: #a8896c;
+// Semáforo OKF (apagado, a juego con la paleta)
+$rojo:     #b4523f;
+$amarillo: #c99a2e;
+$verde:    #5f7f3a;
+$font-family-sans-serif: "Source Sans 3", sans-serif;
+$presentation-heading-font: "Source Serif 4", serif;
 $body-bg: $fondo;
 $body-color: $texto;
 $link-color: $principal;
-$presentation-heading-color: $texto;
+$presentation-heading-color: $principal;
 
 /*-- scss:rules --*/
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;700&family=Source+Serif+4:wght@700&display=swap");
 .reveal .slides { text-align: left; }
 // Manchas de color detrás: sin color, el cristal no se ve
 .reveal .slide-background-content {
@@ -39,3 +51,24 @@ $presentation-heading-color: $texto;
   letter-spacing: .08em; font-weight: 700; color: $principal;
 }
 .reveal .antes .etiqueta { color: rgba($texto, .6); }
+
+// Semáforo OKF en cristal: tres tarjetas, una por estado
+.reveal .semaforo { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3%; margin-top: .4em; }
+.reveal .semaforo > div {
+  background: rgba(255,255,255,.4);
+  backdrop-filter: blur(14px) saturate(1.3);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  border: 1px solid rgba(255,255,255,.75);
+  border-radius: 16px; box-shadow: 0 6px 24px rgba($texto,.14);
+  padding: .5em .8em; font-size: .7em; color: $suave;
+  border-top: 8px solid var(--luz);
+}
+.reveal .semaforo .luz {
+  display: inline-block; width: 1.1em; height: 1.1em; border-radius: 50%;
+  background: var(--luz); box-shadow: 0 0 18px var(--luz); vertical-align: middle; margin-right: .3em;
+}
+.reveal .semaforo strong { color: $texto; font-size: 1.15em; }
+.reveal .semaforo code { font-size: .9em; }
+.reveal .semaforo .borrador   { --luz: #{$rojo}; }
+.reveal .semaforo .revisado   { --luz: #{$amarillo}; }
+.reveal .semaforo .verificado { --luz: #{$verde}; }

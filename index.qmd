@@ -34,6 +34,30 @@ format:
 Arriba, en una frase: lo que se pidió mejorar
 :::
 
+## El semáforo OKF se queda {.cambio}
+
+::: {.pedido}
+Se conserva: a Guillermo le gustó el semáforo de estado de las páginas OKF
+:::
+
+::: {.semaforo}
+::: {.borrador}
+[]{.luz} **Borrador**
+
+Sin `verified`. Borrador del agente; nadie lo ha revisado.
+:::
+::: {.revisado}
+[]{.luz} **Revisión automática**
+
+`verified: process:<nombre>`. Pasó una revisión automática.
+:::
+::: {.verificado}
+[]{.luz} **Verificado por persona**
+
+`verified: human:<usuario>`. Una persona revisora (p. ej. el profesor) lo comparó contra la fuente.
+:::
+:::
+
 <!-- PLANTILLA: copia este bloque una vez por punto de la retroalimentación -->
 
 ## Punto 1 · [pendiente] {.cambio}
