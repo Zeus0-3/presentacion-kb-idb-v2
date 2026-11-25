@@ -11,7 +11,7 @@ format:
     height: 720
     slide-number: c/t
     hash: true
-    center: true
+    center: false
     embed-resources: true
     footer: "Base de conocimiento · lo que cambió"
 ---

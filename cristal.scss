@@ -65,3 +65,11 @@ $presentation-heading-color: $principal;
 .reveal .semaforo .borrador   { --luz: #{$rojo}; }
 .reveal .semaforo .revisado   { --luz: #{$amarillo}; }
 .reveal .semaforo .verificado { --luz: #{$verde}; }
+
+// Título arriba fijo; el contenido se centra en el espacio que queda
+.reveal .slides > section:not(#title-slide)[style*="block"] {
+  display: flex !important; flex-direction: column; height: 100%;
+}
+.reveal .slides > section:not(#title-slide) > h2 { margin-bottom: 0; }
+.reveal .slides > section:not(#title-slide) > h2 + * { margin-top: auto; }
+.reveal .slides > section:not(#title-slide) > :not(aside):last-of-type { margin-bottom: auto; }
