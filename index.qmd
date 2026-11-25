@@ -12,13 +12,21 @@ format:
     slide-number: c/t
     hash: true
     center: false
+    transition: slide
+    transition-speed: default
+    background-transition: fade
     embed-resources: true
     footer: "Base de conocimiento · lo que cambió"
 ---
 
 ## Cómo leer esta presentación {.cambio}
 
-::: {.columns}
+::::: {.cuerpo}
+::: {.pedido}
+Arriba, en una frase: lo que se pidió mejorar
+:::
+
+:::: {.columns}
 ::: {.column .antes width="48%"}
 [Lo que ya había]{.etiqueta}
 
@@ -29,19 +37,17 @@ format:
 
 - El cambio concreto que se hizo
 :::
-:::
-
-::: {.pedido}
-Arriba, en una frase: lo que se pidió mejorar
-:::
+::::
+:::::
 
 ## El semáforo OKF se queda {.cambio}
 
+::::: {.cuerpo}
 ::: {.pedido}
 Se conserva: a Guillermo le gustó el semáforo de estado de las páginas OKF
 :::
 
-::: {.semaforo}
+:::: {.semaforo}
 ::: {.borrador}
 []{.luz} **Borrador**
 
@@ -57,17 +63,19 @@ Sin `verified`. Borrador del agente; nadie lo ha revisado.
 
 `verified: human:<usuario>`. Una persona revisora (p. ej. el profesor) lo comparó contra la fuente.
 :::
-:::
+::::
+:::::
 
 <!-- PLANTILLA: copia este bloque una vez por punto de la retroalimentación -->
 
 ## Punto 1 · [pendiente] {.cambio}
 
+::::: {.cuerpo}
 ::: {.pedido}
 Se pidió: [pendiente de dictar]
 :::
 
-::: {.columns}
+:::: {.columns}
 ::: {.column .antes width="48%"}
 [Lo que ya había]{.etiqueta}
 
@@ -78,8 +86,11 @@ Se pidió: [pendiente de dictar]
 
 - [pendiente]
 :::
-:::
+::::
+:::::
 
 ## Siguientes pasos {.cambio}
 
+::: {.cuerpo}
 - [pendiente]
+:::

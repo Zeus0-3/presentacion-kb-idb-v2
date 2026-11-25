@@ -22,54 +22,54 @@ $presentation-heading-color: $principal;
 
 /*-- scss:rules --*/
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;700&family=Source+Serif+4:wght@700&display=swap");
+
 .reveal .slides { text-align: left; }
-.reveal .cambio .column.antes,
-.reveal .cambio .column.despues,
-.reveal .pedido {
-  background: rgba(255,255,255,.38);
-  backdrop-filter: blur(14px) saturate(1.3);
-  -webkit-backdrop-filter: blur(14px) saturate(1.3);
-  border: 1px solid rgba(255,255,255,.7);
-  border-radius: 16px;
-  box-shadow: 0 6px 24px rgba($texto, .14);
-  padding: .5em .9em;
+// Fondo: lavado diagonal suave (sin círculos) para que el cristal tenga algo que difuminar
+.reveal .slide-background-content {
+  background: linear-gradient(135deg, $tarjeta 0%, $fondo 40%, $fondo 60%, rgba($principal, .22) 100%);
 }
-.reveal .cambio .columns { display: flex; gap: 4%; }
-.reveal .cambio .column { font-size: .8em; }
-.reveal .cambio .column.antes { opacity: .85; }
-.reveal .cambio .column.despues { border-left: 6px solid $principal; }
-.reveal .pedido { margin: .3em 0 .6em; font-style: italic; font-size: .85em; }
+.reveal h2 { margin-top: .2em; }
+
+// Zona de contenido: debajo del título, centrada y ligeramente hacia arriba
+.reveal .cuerpo {
+  position: absolute; left: 0; right: 0; top: 130px; bottom: 70px;
+  display: flex; flex-direction: column; justify-content: center;
+  gap: 36px; padding-bottom: 40px;
+}
+
+// Cristal
+%cristal {
+  background: rgba(255,255,255,.45);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border: 1px solid rgba(255,255,255,.85);
+  border-radius: 20px;
+  box-shadow: 0 10px 34px rgba($texto,.16), inset 0 1px 0 rgba(255,255,255,.9);
+}
+.reveal .pedido { @extend %cristal; padding: .55em 1em; font-style: italic; font-size: .9em; color: $suave; }
+
+.reveal .cambio .columns { display: flex; gap: 5%; }
+.reveal .cambio .column { @extend %cristal; font-size: .85em; padding: .8em 1.1em; min-height: 6.5em; }
+.reveal .cambio .column.antes { opacity: .88; }
+.reveal .cambio .column.despues { border-left: 8px solid $principal; }
 .reveal .etiqueta {
   display: block; font-size: .65em; text-transform: uppercase;
-  letter-spacing: .08em; font-weight: 700; color: $principal;
+  letter-spacing: .08em; font-weight: 700; color: $principal; margin-bottom: .3em;
 }
 .reveal .antes .etiqueta { color: rgba($texto, .6); }
 
-// Semáforo OKF en cristal: tres tarjetas, una por estado
-.reveal .semaforo { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3%; margin-top: .8em; }
+// Semáforo OKF en cristal
+.reveal .semaforo { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; }
 .reveal .semaforo > div {
-  background: rgba(255,255,255,.4);
-  backdrop-filter: blur(14px) saturate(1.3);
-  -webkit-backdrop-filter: blur(14px) saturate(1.3);
-  border: 1px solid rgba(255,255,255,.75);
-  border-radius: 16px; box-shadow: 0 6px 24px rgba($texto,.14);
-  padding: .9em 1em; font-size: .8em; color: $suave; min-height: 7em;
-  border-top: 8px solid var(--luz);
+  @extend %cristal; padding: 1.1em 1.1em; font-size: .82em; color: $suave;
+  min-height: 9.5em; border-top: 10px solid var(--luz);
 }
 .reveal .semaforo .luz {
   display: inline-block; width: 1.1em; height: 1.1em; border-radius: 50%;
-  background: var(--luz); box-shadow: 0 0 18px var(--luz); vertical-align: middle; margin-right: .3em;
+  background: var(--luz); box-shadow: 0 0 20px var(--luz); vertical-align: middle; margin-right: .3em;
 }
 .reveal .semaforo strong { color: $texto; font-size: 1.15em; }
-.reveal .semaforo code { font-size: .9em; }
+.reveal .semaforo p:first-child { margin-bottom: .6em; }
 .reveal .semaforo .borrador   { --luz: #{$rojo}; }
 .reveal .semaforo .revisado   { --luz: #{$amarillo}; }
 .reveal .semaforo .verificado { --luz: #{$verde}; }
-
-// Título arriba fijo; el contenido se centra en el espacio que queda
-.reveal .slides > section:not(#title-slide)[style*="block"] {
-  display: flex !important; flex-direction: column; height: 100%;
-}
-.reveal .slides > section:not(#title-slide) > h2 { margin-bottom: 0; }
-.reveal .slides > section:not(#title-slide) > h2 + * { margin-top: auto; }
-.reveal .slides > section:not(#title-slide) > :not(aside):last-of-type { margin-bottom: auto; }
