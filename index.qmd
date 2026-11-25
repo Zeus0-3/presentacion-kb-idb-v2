@@ -41,28 +41,28 @@ Arriba, en una frase: lo que se pidió mejorar
 ::::
 :::::
 
-## El semáforo se queda en los artículos {.cambio}
+## El semáforo califica la ingesta {.cambio}
 
 ::::: {.cuerpo}
 ::: {.pedido}
-Se conserva, pero solo en **artículos**: la literatura especializada sí debe estar revisada
+¿Rojo o amarillo? El artículo ya lo aprobó un comité: se califica **lo que escribió el agente** al ingerirlo
 :::
 
 :::: {.semaforo}
-::: {.borrador}
-[]{.luz} **Borrador**
-
-Sin `verified`. Borrador del agente; nadie lo ha revisado.
-:::
 ::: {.revisado}
-[]{.luz} **Revisión automática**
+[]{.luz} **Ingerido, espera revisión**
 
-`verified: process:<nombre>`. Pasó una revisión automática.
+Estado normal al terminar la ingesta. Se puede citar con cautela.
 :::
 ::: {.verificado}
-[]{.luz} **Verificado por persona**
+[]{.luz} **Revisado por el experto**
 
-`verified: human:<usuario>`. Una persona revisora (p. ej. el profesor) lo comparó contra la fuente.
+Guillermo confirma que dice lo que dice el artículo y que se entendió bien.
+:::
+::: {.borrador}
+[]{.luz} **Detenido**
+
+Falló la ingesta: una cita que no aparece, una ecuación que no cuadra. No se usa hasta corregirlo; luego vuelve a amarillo.
 :::
 ::::
 :::::
@@ -103,7 +103,7 @@ No es lo mismo que el modelo no entienda, a que la clase contradiga a la literat
 ::: {.duda}
 **⚠️ Duda**
 
-El modelo no entiende del todo un pasaje de la clase: transcripción ambigua, cifra rara, término confuso. La levanta el propio agente al ingerir.
+El modelo no entiende del todo un pasaje de una clase o de un artículo: transcripción ambigua, cifra rara, término confuso. La levanta el propio agente al ingerir.
 :::
 ::: {.contra}
 **🚨 Contradicción**
@@ -151,6 +151,39 @@ Revisa solo esa alerta: corrige o descarta, y firma.
 Queda la nota «en clase se dijo X; la literatura dice Y» para que no se repita.
 :::
 ::::
+:::::
+
+## Alertas y semáforo: un registro, una vista {.cambio}
+
+::::: {.cuerpo}
+::: {.pedido}
+Las alertas son el **único lugar** donde se registra un problema; el semáforo **se calcula** de ellas. Nadie pone el rojo a mano
+:::
+
+::: {.rubrica}
+| | Alerta | Semáforo |
+|---|---|---|
+| Qué es | Un **caso**: qué está mal, dónde, quién lo cierra | Un **estado**: ¿puedo citar este artículo? |
+| Dónde vive | `wiki/alertas.md` | En la página del artículo |
+| Para quién | El experto: revisa y cierra | Quien consulta: lo ve de un vistazo |
+| Regla | se abre y se cierra con `Corregir` / `Descartar` | 🔴 alerta abierta · 🟡 sin alertas ni visto bueno · 🟢 visto bueno y sin alertas |
+:::
+:::::
+
+## Tres casos de ejemplo {.cambio}
+
+::::: {.cuerpo}
+::: {.pedido}
+Un choque con la clase **no** baja la luz del artículo: el artículo es la referencia contra la que se compara
+:::
+
+::: {.rubrica}
+| Qué pasa | Alerta | Dónde va | Luz del artículo |
+|---|---|---|---|
+| Al ingerir un artículo, una cita no aparece en el PDF | ⚠️ Duda | página del artículo | 🔴 hasta corregir |
+| El artículo nuevo define distinto un concepto de clase | 🚨 Contradicción | página de la clase o concepto | se queda 🟡 / 🟢 |
+| Una clase nueva choca con un artículo ya ingerido | 🚨 Contradicción | página de la clase o concepto | sin cambio |
+:::
 :::::
 
 ## Dos cursos, una base {.cambio}
@@ -429,6 +462,7 @@ Se pidió: quitar la re-ingesta de respuestas buenas a la base
 | `sources` | Lista de fuentes de una página | encabezado (frontmatter) de la página |
 | `index.md` | Mapa de toda la base | `wiki/index.md` |
 | Alerta ⚠️ / 🚨 | Duda del modelo / choque con un artículo | `wiki/alertas.md` |
+| Semáforo 🟡🟢🔴 | Estado de un artículo ingerido; se calcula de las alertas | página del artículo |
 | Agente NK | Detecta y gestiona alertas | reglas en `schema/` |
 | `check.py` | Validador y examen médico | `scripts/check.py` |
 | `Lint` | Orden para que el agente revise la wiki | `schema/AGENTS.md` |
@@ -443,7 +477,8 @@ Se pidió: quitar la re-ingesta de respuestas buenas a la base
 ::: {.rubrica .compacta}
 | Punto | Estado | Dónde |
 |---|---|---|
-| Semáforo solo en artículos · alertas · agente NK | ✅ hecho | `schema/`, `wiki/alertas.md` |
+| Semáforo solo en artículos · alertas · agente NK | ✅ hecho |
+| Semáforo redefinido (🟡 ingerido · 🟢 experto · 🔴 detenido) | 🔄 en la presentación; sigue el schema | `schema/`, `wiki/alertas.md` |
 | Sigla EE en carpetas e identificadores | ✅ hecho | `raw/`, `wiki/`, `schema/` |
 | Glosario y orden `Coherencia` | ✅ hecho | `schema/GLOSARIO.md` |
 | Clases IDB 004, 006, 007 y 008 | ✅ ingeridas | `wiki/classes/idb/` |

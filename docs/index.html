@@ -1030,24 +1030,24 @@ Zeus
 </div></div>
 </div>
 </section>
-<section id="el-semáforo-se-queda-en-los-artículos" class="slide level2 cambio">
-<h2>El semáforo se queda en los artículos</h2>
+<section id="el-semáforo-califica-la-ingesta" class="slide level2 cambio">
+<h2>El semáforo califica la ingesta</h2>
 <div class="cuerpo">
 <div class="pedido">
-<p>Se conserva, pero solo en <strong>artículos</strong>: la literatura especializada sí debe estar revisada</p>
+<p>¿Rojo o amarillo? El artículo ya lo aprobó un comité: se califica <strong>lo que escribió el agente</strong> al ingerirlo</p>
 </div>
 <div class="semaforo">
-<div class="borrador">
-<p><span class="luz"></span> <strong>Borrador</strong></p>
-<p>Sin <code>verified</code>. Borrador del agente; nadie lo ha revisado.</p>
-</div>
 <div class="revisado">
-<p><span class="luz"></span> <strong>Revisión automática</strong></p>
-<p><code>verified: process:&lt;nombre&gt;</code>. Pasó una revisión automática.</p>
+<p><span class="luz"></span> <strong>Ingerido, espera revisión</strong></p>
+<p>Estado normal al terminar la ingesta. Se puede citar con cautela.</p>
 </div>
 <div class="verificado">
-<p><span class="luz"></span> <strong>Verificado por persona</strong></p>
-<p><code>verified: human:&lt;usuario&gt;</code>. Una persona revisora (p. ej. el profesor) lo comparó contra la fuente.</p>
+<p><span class="luz"></span> <strong>Revisado por el experto</strong></p>
+<p>Guillermo confirma que dice lo que dice el artículo y que se entendió bien.</p>
+</div>
+<div class="borrador">
+<p><span class="luz"></span> <strong>Detenido</strong></p>
+<p>Falló la ingesta: una cita que no aparece, una ecuación que no cuadra. No se usa hasta corregirlo; luego vuelve a amarillo.</p>
 </div>
 </div>
 </div>
@@ -1085,7 +1085,7 @@ Zeus
 <div class="alertas">
 <div class="duda">
 <p><strong>⚠️ Duda</strong></p>
-<p>El modelo no entiende del todo un pasaje de la clase: transcripción ambigua, cifra rara, término confuso. La levanta el propio agente al ingerir.</p>
+<p>El modelo no entiende del todo un pasaje de una clase o de un artículo: transcripción ambigua, cifra rara, término confuso. La levanta el propio agente al ingerir.</p>
 </div>
 <div class="contra">
 <p><strong>🚨 Contradicción</strong></p>
@@ -1124,6 +1124,98 @@ Zeus
 <p><span class="num">5</span> <strong>Memoria</strong></p>
 <p>Queda la nota «en clase se dijo X; la literatura dice Y» para que no se repita.</p>
 </div>
+</div>
+</div>
+</section>
+<section id="alertas-y-semáforo-un-registro-una-vista" class="slide level2 cambio">
+<h2>Alertas y semáforo: un registro, una vista</h2>
+<div class="cuerpo">
+<div class="pedido">
+<p>Las alertas son el <strong>único lugar</strong> donde se registra un problema; el semáforo <strong>se calcula</strong> de ellas. Nadie pone el rojo a mano</p>
+</div>
+<div class="rubrica">
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Alerta</th>
+<th>Semáforo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Qué es</td>
+<td>Un <strong>caso</strong>: qué está mal, dónde, quién lo cierra</td>
+<td>Un <strong>estado</strong>: ¿puedo citar este artículo?</td>
+</tr>
+<tr class="even">
+<td>Dónde vive</td>
+<td><code>wiki/alertas.md</code></td>
+<td>En la página del artículo</td>
+</tr>
+<tr class="odd">
+<td>Para quién</td>
+<td>El experto: revisa y cierra</td>
+<td>Quien consulta: lo ve de un vistazo</td>
+</tr>
+<tr class="even">
+<td>Regla</td>
+<td>se abre y se cierra con <code>Corregir</code> / <code>Descartar</code></td>
+<td>🔴 alerta abierta · 🟡 sin alertas ni visto bueno · 🟢 visto bueno y sin alertas</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="tres-casos-de-ejemplo" class="slide level2 cambio">
+<h2>Tres casos de ejemplo</h2>
+<div class="cuerpo">
+<div class="pedido">
+<p>Un choque con la clase <strong>no</strong> baja la luz del artículo: el artículo es la referencia contra la que se compara</p>
+</div>
+<div class="rubrica">
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Qué pasa</th>
+<th>Alerta</th>
+<th>Dónde va</th>
+<th>Luz del artículo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Al ingerir un artículo, una cita no aparece en el PDF</td>
+<td>⚠️ Duda</td>
+<td>página del artículo</td>
+<td>🔴 hasta corregir</td>
+</tr>
+<tr class="even">
+<td>El artículo nuevo define distinto un concepto de clase</td>
+<td>🚨 Contradicción</td>
+<td>página de la clase o concepto</td>
+<td>se queda 🟡 / 🟢</td>
+</tr>
+<tr class="odd">
+<td>Una clase nueva choca con un artículo ya ingerido</td>
+<td>🚨 Contradicción</td>
+<td>página de la clase o concepto</td>
+<td>sin cambio</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </section>
@@ -1556,16 +1648,21 @@ Zeus
 <td><code>wiki/alertas.md</code></td>
 </tr>
 <tr class="even">
+<td>Semáforo 🟡🟢🔴</td>
+<td>Estado de un artículo ingerido; se calcula de las alertas</td>
+<td>página del artículo</td>
+</tr>
+<tr class="odd">
 <td>Agente NK</td>
 <td>Detecta y gestiona alertas</td>
 <td>reglas en <code>schema/</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>check.py</code></td>
 <td>Validador y examen médico</td>
 <td><code>scripts/check.py</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>Lint</code></td>
 <td>Orden para que el agente revise la wiki</td>
 <td><code>schema/AGENTS.md</code></td>
@@ -1597,44 +1694,49 @@ Zeus
 <tr class="odd">
 <td>Semáforo solo en artículos · alertas · agente NK</td>
 <td>✅ hecho</td>
-<td><code>schema/</code>, <code>wiki/alertas.md</code></td>
+<td></td>
 </tr>
 <tr class="even">
+<td>Semáforo redefinido (🟡 ingerido · 🟢 experto · 🔴 detenido)</td>
+<td>🔄 en la presentación; sigue el schema</td>
+<td><code>schema/</code>, <code>wiki/alertas.md</code></td>
+</tr>
+<tr class="odd">
 <td>Sigla EE en carpetas e identificadores</td>
 <td>✅ hecho</td>
 <td><code>raw/</code>, <code>wiki/</code>, <code>schema/</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Glosario y orden <code>Coherencia</code></td>
 <td>✅ hecho</td>
 <td><code>schema/GLOSARIO.md</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Clases IDB 004, 006, 007 y 008</td>
 <td>✅ ingeridas</td>
 <td><code>wiki/classes/idb/</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Enlaces justificados y examen médico</td>
 <td>✅ hecho</td>
 <td><code>schema/</code>, <code>check.py</code>, <code>wiki/salud.md</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Sin re-ingesta de respuestas</td>
 <td>✅ hecho</td>
 <td><code>schema/</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Costo: revisión bibliográfica</td>
 <td>✅ hecha</td>
 <td><code>REVISION_COSTO_LLM.md</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Costo: columnas en <code>log.md</code></td>
 <td>⏳ por decidir</td>
 <td><code>log.md</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Revisar alertas abiertas</td>
 <td>⏳ con el experto</td>
 <td><code>wiki/alertas.md</code></td>
