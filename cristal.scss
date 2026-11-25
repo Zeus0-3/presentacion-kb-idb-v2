@@ -109,3 +109,5 @@ $presentation-heading-color: $principal;
 .reveal .rubrica tr:last-child td { border-bottom: 0; }
 .reveal .glosario table { font-size: .64em; }
 .reveal .rubrica caption { font-size: .8em; font-style: italic; color: $suave; caption-side: bottom; text-align: left; padding-top: .4em; }
+.reveal .compacta table { font-size: .6em; }
+.reveal .compacta td, .reveal .compacta th { padding: .25em .5em !important; }

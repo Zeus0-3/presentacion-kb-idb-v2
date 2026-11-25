@@ -293,15 +293,36 @@ Se pidió: indicadores de **costo**. Primero, revisar cómo se miden afuera
 ::: {.rubrica}
 | Indicador | ¿Se mide aquí? | Cómo |
 |---|---|---|
-| Tokens por orden (ingesta, pregunta) | Sí, directo | lo reporta el modelo; se anota en `log.md` |
+| Tokens (entrada, salida, caché) | Sí, directo | campo `usage` de cada respuesta → `log.md` |
 | Tiempo de cómputo | Sí, directo | inicio y fin de cada orden |
-| Energía (kWh) | Estimado | tokens × factor publicado |
-| CO₂ (g) | Estimado | energía × intensidad de la red |
-| Agua (L) | Estimado | energía × factor hídrico |
+| Energía (Wh) | Estimado | tokens × factor publicado (nube) · medidor de enchufe (Ollama local) |
+| CO₂ (g) | Estimado | energía × 438 g/kWh (red de México) |
+| Agua (mL) | Estimado | energía × (0.55 + 3.14) L/kWh |
 
-: Los factores salen de la revisión bibliográfica, citados.
+: Factores de la revisión bibliográfica (lámina siguiente). Anthropic no publica energía, CO₂ ni agua por consulta.
 :::
 
+:::::
+
+## Qué dice la literatura sobre el costo {.cambio}
+
+::::: {.cuerpo}
+::: {.pedido}
+Se mide directo: tokens, tiempo y dinero. Lo ambiental se **estima** con factores publicados
+:::
+
+::: {.rubrica .compacta}
+| Fuente | Qué mide | Cifra |
+|---|---|---|
+| Epoch AI (You, 2025) | Consulta GPT-4o | ~0.3 Wh (~2.5 Wh con 10 k tokens de entrada) |
+| Google (2025) | Consulta mediana Gemini | 0.24 Wh · 0.03 g CO₂e · 0.26 mL de agua |
+| Mistral, ciclo de vida (2025) | Respuesta de 400 tokens | 1.14 g CO₂e · 45 mL de agua |
+| Luccioni et al., FAccT '24 | Texto, CodeCarbon en A100 | 0.047 kWh por 1000 inferencias |
+| Li et al., *Making AI Less Thirsty* | Agua: centro de datos + red | 0.55 + 3.14 L/kWh (EE. UU.) |
+| CRE/SEMARNAT, FE-SEN 2023 | Red eléctrica de México | 0.438 t CO₂e/MWh |
+
+: Detalle, incertidumbre y referencias completas: `REVISION_COSTO_LLM.md`.
+:::
 :::::
 
 ## Las respuestas ya no se re-ingieren {.cambio}
@@ -355,7 +376,7 @@ Se pidió: quitar la re-ingesta de respuestas buenas a la base
 | Sigla EE en carpetas e identificadores | `raw/`, `wiki/`, `schema/` |
 | Glosario y agente de coherencia | `schema/`, presentación |
 | Enlaces justificados y examen médico | `schema/`, `check.py`, `wiki/salud.md` |
-| Revisión bibliográfica de costo | plan aparte |
+| Columnas de costo en `log.md` | `schema/`, `log.md` |
 | Quitar `Guardar consulta` | `schema/` |
 :::
 :::
