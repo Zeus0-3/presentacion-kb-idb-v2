@@ -1,0 +1,60 @@
+---
+title: "Base de conocimiento: lo que cambió"
+subtitle: "Respuesta a la retroalimentación de Guillermo Barrios del Valle"
+author: "Zeus"
+date: 2026-11-25
+lang: es
+format:
+  revealjs:
+    theme: [default, cristal.scss]
+    width: 1280
+    height: 720
+    slide-number: c/t
+    hash: true
+    embed-resources: true
+    footer: "Base de conocimiento · lo que cambió"
+---
+
+## Cómo leer esta presentación {.cambio}
+
+::: {.columns}
+::: {.column .antes width="48%"}
+[Lo que ya había]{.etiqueta}
+
+- Lo que hacía la base en la sesión pasada
+:::
+::: {.column .despues width="48%"}
+[Cómo se mejoró]{.etiqueta}
+
+- El cambio concreto que se hizo
+:::
+:::
+
+::: {.pedido}
+Arriba, en una frase: lo que se pidió mejorar
+:::
+
+<!-- PLANTILLA: copia este bloque una vez por punto de la retroalimentación -->
+
+## Punto 1 · [pendiente] {.cambio}
+
+::: {.pedido}
+Se pidió: [pendiente de dictar]
+:::
+
+::: {.columns}
+::: {.column .antes width="48%"}
+[Lo que ya había]{.etiqueta}
+
+- [pendiente]
+:::
+::: {.column .despues width="48%"}
+[Cómo se mejoró]{.etiqueta}
+
+- [pendiente]
+:::
+:::
+
+## Siguientes pasos {.cambio}
+
+- [pendiente]
