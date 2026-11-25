@@ -153,12 +153,209 @@ Queda la nota «en clase se dijo X; la literatura dice Y» para que no se repita
 ::::
 :::::
 
+## Dos cursos, una base {.cambio}
+
+::::: {.cuerpo}
+::: {.pedido}
+Se pidió: usar el nombre y la sigla reales del segundo curso
+:::
+
+:::: {.columns}
+::: {.column .antes width="48%"}
+[Lo que ya había]{.etiqueta}
+
+- **IDB** · Introducción al Diseño Bioclimático
+- **IEE** · «Introducción a la Energía en Edificaciones»
+:::
+::: {.column .despues width="48%"}
+[Cómo se mejora]{.etiqueta}
+
+- **IDB** · Introducción al Diseño Bioclimático (sin cambio)
+- **EE** · Energía en Edificaciones, también en carpetas e identificadores (`ee-001`)
+:::
+::::
+:::::
+
+## Cada referencia se explica donde aparece {.cambio}
+
+::::: {.cuerpo}
+::: {.pedido}
+Se pidió: coherencia. Se citaban cosas sin decir qué o dónde eran
+:::
+
+:::: {.columns}
+::: {.column .antes width="48%"}
+[Lo que ya había]{.etiqueta}
+
+- «Sumar la fuente a `sources`», sin decir qué es `sources`
+- Un mismo elemento con varios nombres entre láminas
+:::
+::: {.column .despues width="48%"}
+[Cómo se mejora]{.etiqueta}
+
+- **Glosario de nombres fijos**: cada término, qué es, dónde vive y un ejemplo
+- Ej.: `sources` es la lista de fuentes en el encabezado (frontmatter) de cada página
+- **Agente de coherencia**: revisa antes de entregar términos sin definir, sinónimos y referencias sin ubicación
+:::
+::::
+:::::
+
+## La base ya tiene todas las clases {.cambio}
+
+::::: {.cuerpo}
+::: {.pedido}
+Se conserva: la base es acumulativa; cada clase nueva suma a las páginas que ya existen
+:::
+
+:::: {.cifras}
+::: {}
+[30]{.grande}
+
+**clases**
+
+14 de IDB y 16 de EE
+:::
+::: {}
+[+4]{.grande}
+
+**clases nuevas**
+
+IDB 004, 006, 007 y 008
+:::
+::: {}
+[0]{.grande}
+
+**enlaces rotos**
+
+y 0 páginas huérfanas
+:::
+::: {}
+[↻]{.grande}
+
+**páginas, enlaces y citas**
+
+se recalculan con `check.py`
+:::
+::::
+:::::
+
+## Enlazar solo lo que de verdad se relaciona {.cambio}
+
+::::: {.cuerpo}
+::: {.pedido}
+Se pidió: la regla «≥ 2 enlaces» puede forzar conexiones entre conceptos que no son conectables
+:::
+
+:::: {.columns}
+::: {.column .antes width="48%"}
+[Lo que ya había]{.etiqueta}
+
+- Regla de oro: cada concepto enlaza a **al menos dos** parientes
+- Cumplir el número podía inventar relaciones
+:::
+::: {.column .despues width="48%"}
+[Cómo se mejora]{.etiqueta}
+
+- Se enlaza solo si hay relación **real y citada**
+- Cada enlace dice su tipo: *es parte de*, *se calcula con*, *se usa en*, *contrasta con*
+- Menos de 2 enlaces ya no es error: es un **indicador** para revisar
+:::
+::::
+:::::
+
+## Examen médico de la base {.cambio}
+
+::::: {.cuerpo}
+::: {.pedido}
+Se pidió: ¿con qué indicadores medimos la salud y cada cuánto? **Al terminar cada ingesta y cada mes**, en `wiki/salud.md`
+:::
+
+::: {.rubrica}
+| Indicador | Sano | Revisar si… |
+|---|---|---|
+| Cobertura: clases ingeridas / disponibles | 100 % | falta alguna clase |
+| Enlaces rotos y páginas huérfanas | 0 | hay al menos uno |
+| Afirmaciones con cita (minuto o línea) | 100 % | alguna sin cita |
+| Alertas ⚠️ / 🚨 abiertas | 0 viejas | alguna con más de un mes |
+| Posibles duplicados | 0 | aparece uno |
+| Conceptos con < 2 enlaces justificados | revisados | sin revisar |
+:::
+
+:::::
+
+## ¿Cuánto cuesta mantener la base? {.cambio}
+
+::::: {.cuerpo}
+::: {.pedido}
+Se pidió: indicadores de **costo**. Primero, revisar cómo se miden afuera
+:::
+
+::: {.rubrica}
+| Indicador | ¿Se mide aquí? | Cómo |
+|---|---|---|
+| Tokens por orden (ingesta, pregunta) | Sí, directo | lo reporta el modelo; se anota en `log.md` |
+| Tiempo de cómputo | Sí, directo | inicio y fin de cada orden |
+| Energía (kWh) | Estimado | tokens × factor publicado |
+| CO₂ (g) | Estimado | energía × intensidad de la red |
+| Agua (L) | Estimado | energía × factor hídrico |
+
+: Los factores salen de la revisión bibliográfica, citados.
+:::
+
+:::::
+
+## Las respuestas ya no se re-ingieren {.cambio}
+
+::::: {.cuerpo}
+::: {.pedido}
+Se pidió: quitar la re-ingesta de respuestas buenas a la base
+:::
+
+:::: {.columns}
+::: {.column .antes width="48%"}
+[Lo que ya había]{.etiqueta}
+
+- Orden `Guardar consulta`: una buena respuesta se guardaba como página
+- Lo derivado se mezclaba con las fuentes
+:::
+::: {.column .despues width="48%"}
+[Cómo se mejora]{.etiqueta}
+
+- **Se elimina**: la base solo crece con fuentes (`raw/`)
+- Las respuestas se quedan en el chat; no contaminan la wiki
+:::
+::::
+:::::
+
+## Glosario de esta presentación {.cambio}
+
+::: {.cuerpo}
+::: {.rubrica .glosario}
+| Término | Qué es | Dónde vive |
+|---|---|---|
+| `raw/` | Fuentes originales, no se modifican | `raw/videos/`, `raw/notebooks/`, `raw/pdfs/` |
+| `wiki/` | La base: páginas que escribe el agente | bóveda de Obsidian |
+| `sources` | Lista de fuentes de una página | encabezado (frontmatter) de la página |
+| `index.md` | Mapa de toda la base | `wiki/index.md` |
+| Alerta ⚠️ / 🚨 | Duda del modelo / choque con un artículo | `wiki/alertas.md` |
+| Agente NK | Detecta y gestiona alertas | reglas en `schema/` |
+| `check.py` | Validador y examen médico | `scripts/check.py` |
+:::
+:::
+
 <!-- PLANTILLA antes/después: copiar la lámina «Revisar todo frena…» por cada punto -->
 
 ## Siguientes pasos {.cambio}
 
 ::: {.cuerpo}
-- Escribir el protocolo NK y las dos alertas en `schema/` (bases A y B)
-- Crear `wiki/alertas.md` y enlazarlo desde `index.md`
-- Acotar el semáforo a artículos y que `check.py` cuente alertas abiertas
+::: {.rubrica}
+| Qué | Dónde |
+|---|---|
+| Protocolo NK, alertas y semáforo solo en artículos | `schema/` de las bases A y B |
+| Sigla EE en carpetas e identificadores | `raw/`, `wiki/`, `schema/` |
+| Glosario y agente de coherencia | `schema/`, presentación |
+| Enlaces justificados y examen médico | `schema/`, `check.py`, `wiki/salud.md` |
+| Revisión bibliográfica de costo | plan aparte |
+| Quitar `Guardar consulta` | `schema/` |
+:::
 :::
