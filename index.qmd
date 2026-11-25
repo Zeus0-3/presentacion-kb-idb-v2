@@ -478,7 +478,7 @@ Se pidió: quitar la re-ingesta de respuestas buenas a la base
 | Punto | Estado | Dónde |
 |---|---|---|
 | Semáforo solo en artículos · alertas · agente NK | ✅ hecho |
-| Semáforo redefinido (🟡 ingerido · 🟢 experto · 🔴 detenido) | 🔄 en la presentación; sigue el schema | `schema/`, `wiki/alertas.md` |
+| Semáforo redefinido (🟡 ingerido · 🟢 experto · 🔴 detenido) | ✅ hecho | `schema/`, `wiki/alertas.md` |
 | Sigla EE en carpetas e identificadores | ✅ hecho | `raw/`, `wiki/`, `schema/` |
 | Glosario y orden `Coherencia` | ✅ hecho | `schema/GLOSARIO.md` |
 | Clases IDB 004, 006, 007 y 008 | ✅ ingeridas | `wiki/classes/idb/` |
