@@ -28,7 +28,10 @@ $presentation-heading-color: $principal;
 .reveal .slides { text-align: left; }
 // Fondo: lavado diagonal suave (sin círculos) para que el cristal tenga algo que difuminar
 .reveal .slide-background-content {
-  background: linear-gradient(135deg, $tarjeta 0%, $fondo 38%, $fondo 55%, rgba($principal, .30) 100%);
+  background:
+    linear-gradient(90deg, transparent 38px, rgba($rojo,.35) 38px, rgba($rojo,.35) 40px, transparent 40px),
+    repeating-linear-gradient(180deg, transparent 0 35px, rgba($principal,.22) 35px 36px),
+    linear-gradient(135deg, $tarjeta 0%, $fondo 40%, $fondo 60%, rgba($principal,.18) 100%);
 }
 .reveal h2 { margin-top: .2em; }
 
@@ -78,3 +81,17 @@ $presentation-heading-color: $principal;
 .reveal code { color: $acento; }
 .reveal, .reveal p, .reveal li { font-family: "Source Sans 3", sans-serif; }
 .reveal h1, .reveal h2, .reveal h3, .reveal .semaforo strong { font-family: "Source Serif 4", serif; }
+
+// Protocolo NK: 5 pasos en fila
+.reveal .nk { display: grid; grid-template-columns: repeat(5, 1fr); gap: 22px; }
+.reveal .nk > div { @extend %cristal; padding: .7em .7em; font-size: .62em; color: $suave; min-height: 10.5em; border-top: 8px solid $principal; }
+.reveal .nk > div.humano { border-top-color: $verde; }
+.reveal .nk strong { display: block; font-family: "Source Serif 4", serif; color: $texto; font-size: 1.25em; margin-bottom: .3em; }
+.reveal .nk .num { display: block; font-size: 1.6em; font-weight: 700; color: $principal; line-height: 1; }
+// Dos alertas
+.reveal .alertas { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.reveal .alertas > div { @extend %cristal; padding: .9em 1.1em; font-size: .75em; color: $suave; min-height: 8em; }
+.reveal .alertas .duda { border-top: 10px solid $amarillo; }
+.reveal .alertas .contra { border-top: 10px solid $rojo; }
+.reveal .alertas p:first-child strong { font-family: "Source Serif 4", serif; color: $texto; font-size: 1.2em; }
+.reveal .cambio .column li { margin-bottom: .35em; }

@@ -41,11 +41,11 @@ Arriba, en una frase: lo que se pidió mejorar
 ::::
 :::::
 
-## El semáforo OKF se queda {.cambio}
+## El semáforo se queda en los artículos {.cambio}
 
 ::::: {.cuerpo}
 ::: {.pedido}
-Se conserva: a Guillermo le gustó el semáforo de estado de las páginas OKF
+Se conserva, pero solo en **artículos**: la literatura especializada sí debe estar revisada
 :::
 
 :::: {.semaforo}
@@ -67,31 +67,98 @@ Sin `verified`. Borrador del agente; nadie lo ha revisado.
 ::::
 :::::
 
-<!-- PLANTILLA: copia este bloque una vez por punto de la retroalimentación -->
-
-## Punto 1 · [pendiente] {.cambio}
+## Revisar todo frena que la base se alimente sola {.cambio}
 
 ::::: {.cuerpo}
 ::: {.pedido}
-Se pidió: [pendiente de dictar]
+Se pidió: ¿qué pasa si en clase se dice un concepto erróneo y la base lo ingiere tal cual?
 :::
 
 :::: {.columns}
 ::: {.column .antes width="48%"}
 [Lo que ya había]{.etiqueta}
 
-- [pendiente]
+- Semáforo 🔴🟡🟢 en **todas** las páginas
+- Para estar en 🟢, un humano revisa cada página contra la fuente
+- `Lint` reportaba «contradicciones entre páginas», sin lugar fijo ni seguimiento
 :::
 ::: {.column .despues width="48%"}
-[Cómo se mejoró]{.etiqueta}
+[Cómo se mejora]{.etiqueta}
 
-- [pendiente]
+- Semáforo **solo en artículos**; lo demás se autoalimenta
+- **Alertas** conectadas desde `index.md`, con la ubicación exacta de lo ingerido
+- Un **agente NK** detecta, aísla y propone; el experto interviene solo en esos puntos
 :::
 ::::
 :::::
 
+## Dos alertas según el origen {.cambio}
+
+::::: {.cuerpo}
+::: {.pedido}
+No es lo mismo que el modelo no entienda, a que la clase contradiga a la literatura
+:::
+
+:::: {.alertas}
+::: {.duda}
+**⚠️ Duda**
+
+El modelo no entiende del todo un pasaje de la clase: transcripción ambigua, cifra rara, término confuso. La levanta el propio agente al ingerir.
+:::
+::: {.contra}
+**🚨 Contradicción**
+
+Un concepto de clase se define distinto o contrario a un **artículo** de literatura especializada. La levanta el agente NK al comparar.
+:::
+::::
+
+::: {.pedido}
+Cada alerta dice **dónde**: página y afirmación de la wiki, archivo de `raw/` con su marca de tiempo y, si aplica, el artículo con la cita.
+:::
+:::::
+
+## El agente NK, sistema inmune de la base {.cambio}
+
+::::: {.cuerpo}
+::: {.pedido}
+Como las células NK: vigila, detecta lo extraño y actúa con un protocolo, sin revisar todo el cuerpo
+:::
+
+:::: {.nk}
+::: {}
+[1]{.num} **Detectar**
+
+Tras cada ingesta revisa los conceptos tocados: dudas y choques con artículos.
+:::
+::: {}
+[2]{.num} **Aislar**
+
+Marca la afirmación en su página y abre la alerta en `alertas.md`. No borra nada.
+:::
+::: {}
+[3]{.num} **Proponer**
+
+Redacta la corrección con su cita al artículo, sin aplicarla.
+:::
+::: {.humano}
+[4]{.num} **Experto**
+
+Revisa solo esa alerta: corrige o descarta, y firma.
+:::
+::: {}
+[5]{.num} **Memoria**
+
+Queda la nota «en clase se dijo X; la literatura dice Y» para que no se repita.
+:::
+::::
+:::::
+
+<!-- PLANTILLA antes/después: copiar la lámina «Revisar todo frena…» por cada punto -->
+
 ## Siguientes pasos {.cambio}
 
 ::: {.cuerpo}
-- [pendiente]
+- Escribir el protocolo NK y las dos alertas en `schema/` (bases A y B)
+- Crear `wiki/alertas.md` y enlazarlo desde `index.md`
+- Acotar el semáforo a artículos y que `check.py` cuente alertas abiertas
 :::
